@@ -294,3 +294,10 @@ form.f .opts label{flex-direction:row!important;align-items:center;text-align:le
 }
 @media(min-width:641px){.brand img{height:84px}.brand .lt b{font-size:25px}}
 @media(max-width:640px){section.dark .badges{display:flex;flex-direction:column!important}section.dark .badge{flex-direction:row;text-align:left;padding:16px;min-width:0!important}section.dark .badge span{display:block}section.dark .badge strong{font-size:16px}}
+.specs{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:36px}
+.spec{background:#fff;border:1px solid var(--line);border-top:3px solid var(--blue);padding:26px 24px}
+.spec h3{font-size:19px;margin:0 0 14px}.spec ul{margin:0;padding-left:18px}.spec li{margin:0 0 9px;line-height:1.5}
+.spec .note{font-size:14px;color:var(--muted);margin:12px 0 0}
+.spec.wide{margin-top:22px}.spec.wide ul{columns:2;column-gap:40px}
+@media(max-width:1100px){.specs{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.specs{grid-template-columns:1fr}.spec.wide ul{columns:1}}
