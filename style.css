@@ -260,3 +260,37 @@ form.f .opts label{flex-direction:row!important;align-items:center;text-align:le
 }
 @media(max-width:640px){.hero .btn{display:block;text-align:center}}
 @media(max-width:640px){.band .wrap{padding:0}.band .c{padding:18px 20px;border-right:0;border-bottom:1px solid rgba(255,255,255,.08)}.band b{font-size:19px}}
+/* hero certs (COR seal + ACSA 2025) */
+.certs{display:flex;flex-direction:column;align-items:center;gap:16px;justify-self:end;background:rgba(11,18,32,.55);border:1px solid rgba(201,206,214,.25);padding:34px 30px;backdrop-filter:blur(4px);max-width:420px}
+.certs .seal{width:230px;height:230px;border-radius:50%;background:#fff;padding:6px;box-shadow:0 10px 40px rgba(0,0,0,.45)}
+.certs .certcap{font:700 22px Jost;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin:0}
+.certs .acsa{width:100%;max-width:360px;border:1px solid rgba(255,255,255,.15)}
+/* established banner */
+.estb{background:linear-gradient(90deg,#070b14,#0f1a2e 60%,#070b14);color:#fff;padding:46px 0;border-top:3px solid var(--blue)}
+.estb .wrap{display:flex;align-items:center;justify-content:center;gap:44px}
+.est-y{text-align:center;border-right:1px solid rgba(255,255,255,.18);padding-right:44px}
+.est-y small{display:block;font:600 14px Jost;letter-spacing:.3em;text-transform:uppercase;color:#9fb0c3}
+.est-y b{display:block;font:700 76px/1 Jost;letter-spacing:.04em}
+.est-t h2{margin:0 0 8px;font-size:40px;color:#fff}
+.est-t p{margin:0;font:500 20px Jost;color:#cfd6df;letter-spacing:.02em}
+/* product detail pages */
+.od{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:start}.od.nogal{grid-template-columns:1fr;max-width:860px}
+.odtx h2{font-size:28px;margin:34px 0 12px}.odtx h3{font-size:21px;margin:26px 0 8px}.odtx>*:first-child{margin-top:0}
+.odtx p{font-size:17px;line-height:1.7;color:var(--ink)}
+.odtx ul{margin:0 0 18px;padding-left:20px;columns:2;column-gap:30px}.odtx li{margin:0 0 8px;break-inside:avoid}
+.odgal{display:grid;grid-template-columns:1fr 1fr;gap:12px;position:sticky;top:110px}
+.odgal img{width:100%;aspect-ratio:4/3;object-fit:cover;cursor:zoom-in;border:1px solid var(--line)}
+.dl{margin-top:30px;padding:24px;background:#f4f6f8;border-left:4px solid var(--blue)}.dl h3{margin:0 0 12px}
+.dl a{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--line);color:var(--navy);font-weight:600}
+.dl a span{color:var(--blue);font:600 12px Jost;letter-spacing:.15em}
+.pcard .link{display:inline-block}
+@media(max-width:1100px){.od{grid-template-columns:1fr}.odgal{position:static}.certs{justify-self:start}}
+@media(max-width:640px){
+.certs{flex-direction:row;flex-wrap:wrap;justify-content:center;padding:18px;gap:12px;max-width:none;width:100%}
+.certs .seal{width:96px;height:96px;padding:3px}.certs .certcap{font-size:15px}.certs .acsa{max-width:none}
+.estb{padding:28px 0}.estb .wrap{gap:20px}.est-y{padding-right:20px}.est-y b{font-size:48px}.est-y small{font-size:11px}
+.est-t h2{font-size:24px}.est-t p{font-size:15px}
+.odtx ul{columns:1}.odgal{grid-template-columns:1fr 1fr}
+}
+@media(min-width:641px){.brand img{height:84px}.brand .lt b{font-size:25px}}
+@media(max-width:640px){section.dark .badges{display:flex;flex-direction:column!important}section.dark .badge{flex-direction:row;text-align:left;padding:16px;min-width:0!important}section.dark .badge span{display:block}section.dark .badge strong{font-size:16px}}
