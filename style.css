@@ -304,3 +304,4 @@ form.f .opts label{flex-direction:row!important;align-items:center;text-align:le
 .elite{display:flex;align-items:center;gap:20px;padding:18px 20px;border:1px solid var(--line);border-left:4px solid var(--blue);margin-bottom:30px;background:#fff}
 .elite img{width:150px;height:auto;flex:none}.elite p{margin:0}.elite b{display:block;font:600 18px Jost;margin-bottom:4px}
 @media(max-width:640px){.elite{flex-direction:column;align-items:flex-start}}
+@media(max-width:400px){.estb .wrap{flex-direction:column;gap:14px;text-align:center}.est-y{border-right:0;padding-right:0;border-bottom:1px solid rgba(255,255,255,.18);padding-bottom:12px}}
