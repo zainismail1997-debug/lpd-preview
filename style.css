@@ -301,3 +301,6 @@ form.f .opts label{flex-direction:row!important;align-items:center;text-align:le
 .spec.wide{margin-top:22px}.spec.wide ul{columns:2;column-gap:40px}
 @media(max-width:1100px){.specs{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){.specs{grid-template-columns:1fr}.spec.wide ul{columns:1}}
+.elite{display:flex;align-items:center;gap:20px;padding:18px 20px;border:1px solid var(--line);border-left:4px solid var(--blue);margin-bottom:30px;background:#fff}
+.elite img{width:150px;height:auto;flex:none}.elite p{margin:0}.elite b{display:block;font:600 18px Jost;margin-bottom:4px}
+@media(max-width:640px){.elite{flex-direction:column;align-items:flex-start}}
