@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en"><head><meta name="robots" content="noindex,nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Liquid Diamond Intro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1220;--blue:#3D9BE0;--chrome:#C9CED6}
+html,body{margin:0;height:100%;background:#070b14;overflow:hidden}
+#vp{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 45%,#1a2233 0%,#0B1220 45%,#070b14 100%)}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:0 0}
+.portrait #stage{width:1080px;height:1920px}
+#shake{position:absolute;inset:0}
+#mark{position:absolute;left:230px;top:225px;width:433px;height:630px}
+.portrait #mark{left:272px;top:300px;width:536px;height:780px}
+#mark img{position:absolute;inset:0;width:100%;height:100%;will-change:transform}
+#mark img.g{z-index:1}#mark img.b{z-index:2}
+#spark{position:absolute;z-index:3;width:90px;height:90px;margin:-45px 0 0 -45px;left:74.5%;top:45.4%;opacity:0}
+#words{position:absolute;left:730px;top:0;height:1080px;display:flex;flex-direction:column;justify-content:center;gap:26px}
+.portrait #words{left:0;right:0;top:1140px;height:auto;align-items:center;gap:30px}
+.line{display:flex;gap:.32em;white-space:nowrap}
+.l1{font:700 108px/1 Jost,sans-serif;letter-spacing:.03em}
+.l2{font:500 43px/1 Jost,sans-serif;letter-spacing:.2em;padding-left:4px}
+.portrait .l1{font-size:104px;flex-direction:column;align-items:center;gap:14px}
+.portrait .l2{font-size:44px;flex-direction:column;align-items:center;gap:18px}
+.w{display:inline-block;opacity:0;will-change:transform,opacity,filter}
+/* lettering version A: chrome silver with a blue highlight */
+.w{background:linear-gradient(100deg,#7f8792 0%,#eef1f4 18%,#9ea5ae 32%,#ffffff 44%,#8fc6f2 52%,#ffffff 58%,#a7aeb7 70%,#e6e9ed 84%,#7f8792 100%);
+  background-size:300% 100%;background-position:0% 0;-webkit-background-clip:text;background-clip:text;color:transparent}
+.l2 .w{background:linear-gradient(100deg,#9aa1aa,#e9ecef 40%,#ffffff 50%,#c9ced6 60%,#9aa1aa);background-size:300% 100%;-webkit-background-clip:text;background-clip:text}
+/* click-to-enter screen (only the logo is clickable) */
+#gate{position:absolute;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px}
+#gate button{all:unset;cursor:pointer;display:block;width:clamp(120px,16vh,190px)}
+#gate img{width:100%;display:block;filter:drop-shadow(0 0 22px rgba(61,155,224,.35));animation:pulse 2.4s ease-in-out infinite}
+#gate span{font:500 13px/1 Jost,sans-serif;letter-spacing:.32em;color:#C9CED6;opacity:.75;text-transform:uppercase}
+@keyframes pulse{50%{filter:drop-shadow(0 0 34px rgba(61,155,224,.6));transform:scale(1.03)}}
+#snd{position:fixed;right:18px;bottom:16px;z-index:11;font:500 12px Jost,sans-serif;letter-spacing:.15em;color:#C9CED6;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:8px 14px;cursor:pointer;display:none}
+.manual #gate,.manual #snd{display:none!important}
+</style></head>
+<body>
+<div id="vp"><div id="stage"><div id="shake">
+  <div id="mark">
+    <img class="g" id="p1" src="img/piece1.svg" alt=""><img class="b" id="p2" src="img/piece2.svg" alt="">
+    <img class="g" id="p3" src="img/piece3.svg" alt=""><img class="b" id="p4" src="img/piece4.svg" alt="">
+    <svg id="spark" viewBox="-45 -45 90 90"><defs><radialGradient id="sg"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#bfe6ff" stop-opacity=".8"/><stop offset="1" stop-color="#3D9BE0" stop-opacity="0"/></radialGradient></defs>
+      <circle r="30" fill="url(#sg)"/><path d="M0-44 L2.6-2.6 44 0 2.6 2.6 0 44 -2.6 2.6 -44 0 -2.6-2.6Z" fill="#fff"/></svg>
+  </div>
+  <div id="words">
+    <div class="line l1"><span class="w" id="w1">LIQUID</span><span class="w" id="w2">DIAMOND</span></div>
+    <div class="line l2"><span class="w" id="w3">WALL PROTECTION</span><span class="w" id="w4">PRODUCTS</span></div>
+  </div>
+</div></div>
+<div id="gate"><button id="go" aria-label="Enter Liquid Diamond Products"><img src="img/ldp-mark.svg" alt="Liquid Diamond Products"></button><span>Click to enter</span></div>
+</div>
+<button id="snd">SOUND ON</button>
+<audio id="au" src="img/intro-sound.wav" preload="auto"></audio>
+<script>
+// one clank per piece; the word lands with it
+const HIT=[1.0,1.85,2.7,3.55], FALL=0.5, END=6.2;
+const P=[...Array(4)].map((_,i)=>document.getElementById('p'+(i+1)));
+const W=[...Array(4)].map((_,i)=>document.getElementById('w'+(i+1)));
+const spark=document.getElementById('spark'), shake=document.getElementById('shake');
+const cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)), outC=v=>1-Math.pow(1-v,3);
+function fit(){const st=document.getElementById('stage'),por=innerHeight>innerWidth*1.1;
+  document.body.classList.toggle('portrait',por);const w=por?1080:1920,h=por?1920:1080,s=Math.min(innerWidth/w,innerHeight/h);
+  st.style.transform=`scale(${s}) translate(${-w/2}px,${-h/2}px)`;}
+addEventListener('resize',fit);fit();
+function render(t){
+  let sx=0,sy=0;
+  P.forEach((p,i)=>{
+    const h=HIT[i], f=cl((t-(h-FALL))/FALL);          // 0..1 while falling
+    let y=-1500*(1-f*f);                              // gravity: accelerates into the stack
+    const a=t-h; let flash=0;
+    if(a>=0){y=-14*Math.exp(-a*18)*Math.abs(Math.sin(a*40)); flash=Math.exp(-a*7);
+      const k=Math.exp(-a*22)*(i==3?14:9); sx+=k*Math.sin(a*90); sy+=k*Math.cos(a*70);}
+    p.style.transform=`translateY(${y}px)`; p.style.opacity=t<h-FALL?0:1;
+    p.style.filter=flash>0.01?`brightness(${1+flash*0.9}) drop-shadow(0 0 ${30*flash}px rgba(140,200,255,${0.8*flash}))`:'none';
+    const wv=W[i], b=cl(a/0.22);
+    if(a<0){wv.style.opacity=0;}else{wv.style.opacity=cl(a/0.06);
+      wv.style.transform=`scale(${1.35-0.35*outC(b)})`;
+      const g=Math.exp(-a*5); wv.style.filter=`blur(${(1-outC(cl(a/0.12)))*8}px) drop-shadow(0 0 ${26*g}px rgba(160,210,255,${0.9*g}))`;}
+  });
+  shake.style.transform=`translate(${sx}px,${sy}px)`;
+  // after the 4th clank: spark on the tip, then a shine sweep across the lettering
+  const s=t-(HIT[3]+0.35);
+  spark.style.opacity=s<0?0:Math.sin(cl(s/0.9)*Math.PI);
+  spark.style.transform=`scale(${0.3+1.1*Math.sin(cl(s/0.9)*Math.PI)}) rotate(${s*90}deg)`;
+  const sw=cl((t-(HIT[3]+0.5))/1.1); W.forEach(w=>w.style.backgroundPosition=`${100-100*outC(sw)}% 0`);
+}
+render(0);
+if(location.hash=='#manual'){document.body.classList.add('manual');}
+else{
+  const au=document.getElementById('au'),snd=document.getElementById('snd'),gate=document.getElementById('gate');
+  let t0=null;
+  function loop(now){if(t0===null)t0=now;const t=(now-t0)/1000;render(t);
+    if(t<END)requestAnimationFrame(loop);else{setTimeout(()=>parent.postMessage('ldp-intro-done','*'),400);}}
+  document.getElementById('go').addEventListener('click',()=>{gate.style.transition='opacity .35s';gate.style.opacity=0;
+    setTimeout(()=>gate.remove(),400);snd.style.display='block';au.currentTime=0;au.play().catch(()=>{});requestAnimationFrame(loop);});
+  snd.addEventListener('click',()=>{au.muted=!au.muted;snd.textContent=au.muted?'SOUND OFF':'SOUND ON';});
+}
+addEventListener('message',e=>{if(e.data==='stop'){const a=document.getElementById('au');a&&a.pause()}});</script>
+</body></html>
